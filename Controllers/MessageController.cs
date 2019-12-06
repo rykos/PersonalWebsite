@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using MichalRykowskiWebsite.Models;
+using Newtonsoft.Json.Linq;
 
 namespace MichalRykowskiWebsite.Controllers
 {
@@ -35,7 +36,7 @@ namespace MichalRykowskiWebsite.Controllers
             return msg;
         }
 
-        [HttpPost]
+        [HttpPost()]
         public ActionResult<Message> PostMessage(Message message)
         {
             try

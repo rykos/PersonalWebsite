@@ -1,4 +1,63 @@
 ﻿@using MichalRykowskiWebsite.Models;
 @model Message
-
-@Model.Content
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Michał Rykowski</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="~/style/bootstrap.min.css">
+    <link rel="script" href="~/style/bootstrap.min.js">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        function FillData() {
+            @if (Model != null) {
+                @:document.getElementById("ContentText").innerText = "@Model.Content";
+                @:document.getElementById("AuthorText").value = "@Model.Author";
+            }
+        }
+    </script>
+</head>
+<body class="bg-secondary" onload="FillData()">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Michal Rykowski</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ApiWork</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--Content-->
+    <main role="main" class="container">
+        <script>
+            function PostWithAjax() {
+                let formData = $('form').serializeArray();
+                var json = JSON.stringify({ Author: formData[0].value, Content: formData[1].value });
+                $.ajax({
+                    method: "POST",
+                    type: "POST",
+                    url: "http://localhost:7777/api/message",
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    data: json
+                });
+            }
+        </script>
+        <form>
+            <div class="row">
+                <div class="col">
+                    <input id="AuthorText" class="form-control" type="text" name="Author" placeholder="author" value="">
+                </div>
+            </div>
+            <textarea id="ContentText" class="form-control" rows="5" name="Content" placeholder="Content" value=""></textarea>
+            <input class="btn btn-primary" value="Send" onclick="PostWithAjax()">
+        </form>
+    </main>
+</body>
+</html>

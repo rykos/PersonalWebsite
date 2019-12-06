@@ -27,7 +27,17 @@
     </nav>
     <!--Content-->
     <main role="main" class="container">
-        <h1>@Model.Content</h1>
+        <form action="">
+            <div class="row">
+                <div class="col">
+                    <input class="form-control" type="text" name="author" placeholder="author">
+                </div>
+            </div>
+            <textarea class="form-control" rows="5" name="content" placeholder="content">
+
+            </textarea>
+            <input class="btn btn-primary" type="submit" value="Send">
+        </form>
     </main>
 </body>
 </html>

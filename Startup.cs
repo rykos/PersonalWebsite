@@ -24,11 +24,18 @@ namespace MichalRykowskiWebsite
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(opt => {
+                opt.AddPolicy("_myAllowSpecificOrigins", builder =>
+                {
+                    builder.WithOrigins("http://localhost");
+                });
+            });
             services.AddDbContextPool<MessageContext>(
                     opt => opt.UseMySql(Configuration["Data:Connection:ConnectionString"], mysqloptions => 
                     {mysqloptions.ServerVersion(new Version(10, 4, 8), ServerType.MariaDb);})
                 );
-            services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddMvc(option => option.EnableEndpointRouting = false)
+                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

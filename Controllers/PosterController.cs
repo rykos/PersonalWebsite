@@ -11,16 +11,22 @@ namespace MichalRykowskiWebsite.Controllers
     [Route("/poster")]
     public class PosterController : Controller
     {
+        private Random rnd;
         private readonly MessageContext _context;
         public PosterController(MessageContext context)
         {
             this._context = context;
+            rnd = new Random();
         }
 
         public IActionResult Index()
         {
-            Message msg = _context.MessageItems.Find(1);
-            ViewData.Model = msg;
+            if (_context.MessageItems.Count() > 0)
+            {
+                int randomIndex = rnd.Next(0, _context.MessageItems.Count());
+                Message msg = _context.MessageItems.OrderBy(m => m.Id).ToList()[randomIndex];
+                ViewData.Model = msg;
+            }
             return View();
         }
     }
