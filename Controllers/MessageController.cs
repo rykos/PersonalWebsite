@@ -41,6 +41,7 @@ namespace MichalRykowskiWebsite.Controllers
         {
             try
             {
+                message.Date = DateTime.Now;
                 _context.MessageItems.Add(message);
                 _context.SaveChanges();
             }

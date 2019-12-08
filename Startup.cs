@@ -27,7 +27,7 @@ namespace MichalRykowskiWebsite
             services.AddCors(opt => {
                 opt.AddPolicy("_myAllowSpecificOrigins", builder =>
                 {
-                    builder.WithOrigins("http://localhost");
+                    builder.WithOrigins("https://localhost");
                 });
             });
             services.AddDbContextPool<MessageContext>(
@@ -44,6 +44,7 @@ namespace MichalRykowskiWebsite
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseMvc(routes => 
             {
