@@ -24,5 +24,17 @@ namespace MichalRykowskiWebsite.Controllers
 
             return View();
         }
+
+        [Route("/cv")]
+        public IActionResult CV()
+        {
+            return View();
+        }
+
+        [Route("/projects")]
+        public IActionResult Projects()
+        {
+            return View();
+        }
     }
 }
