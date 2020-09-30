@@ -9,9 +9,9 @@ using Microsoft.Extensions.Logging;
 
 namespace MichalRykowskiWebsite
 {
-    public class Program
+    public class Program                           //CREATE PUBLIC CLASS
     {
-        public static void Main(string[] args)
+        public static void Main(string[] args)     //CREATE PUBLIC METHOD
         {
             CreateHostBuilder(args).Build().Run();
         }
